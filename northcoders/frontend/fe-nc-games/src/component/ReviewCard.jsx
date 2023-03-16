@@ -1,13 +1,37 @@
+import { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import { getReviewsById } from '../utils/api';
 
-const ReviewCard = ({ reviews }) => {
+export const ReviewCards = () => {
+
+    const { review_id } = useParams();
+
+    const [reviewCard, setReviewCard] = useState([]);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        
+        setLoading(true)
+        getReviewsById(review_id)
+
+        .then((result) => {
+
+        setReviewCard(result)
+        setLoading(false)
+
+        })
+    })
+
     return (
         <section>
-            <h1>{reviews.owner}</h1>
-            <h2>{reviews.designer}</h2>
-            <h2>{reviews.title}</h2>
-            <h2>{reviews.category}</h2>
-            <p>{reviews.body}</p>
-            {reviews.votes}
+            {loading ? <p>Loading...</p> : <p>Here's your requested reviews</p>}
+            <h1>Owner: {reviewCard.owner}</h1>
+            <h2>Designer: {reviewCard.designer}</h2>
+            <h3>Title: {reviewCard.title}</h3>
+            <h3>Category: {reviewCard.category}</h3>
+            <p>Comment: {reviewCard.review_body}</p>
+            <img src={reviewCard.review_img_url} alt='img'/>
+            <button>Votes: {reviewCard.votes}</button>
         </section>
     )
 }
