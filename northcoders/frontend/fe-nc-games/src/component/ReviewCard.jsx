@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom'
 import { useParams } from 'react-router-dom';
 import { getReviewsById } from '../utils/api';
 
@@ -32,6 +33,9 @@ export const ReviewCards = () => {
             <p>Comment: {reviewCard.review_body}</p>
             <img src={reviewCard.review_img_url} alt='img'/>
             <button>Votes: {reviewCard.votes}</button>
+            <Link to={'/reviews'}>
+            <button>Wanna Go Back?</button>
+            </Link>
         </section>
     )
 }
