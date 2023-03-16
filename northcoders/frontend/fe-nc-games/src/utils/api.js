@@ -20,7 +20,6 @@ export const getReviewsById = (review_id) => {
   return reviewsUrl
   .get(path)
   .then((res) => {
-    console.log(res)
     return res.data.customerReviews
   })
 }

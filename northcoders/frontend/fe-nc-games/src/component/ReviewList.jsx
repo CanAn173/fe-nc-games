@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import { getReviews } from '../utils/api'
-// import {ReviewCard} from './ReviewCard'
+
 
 export const ReviewList = () => {
 
@@ -9,6 +9,7 @@ export const ReviewList = () => {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
+      setLoading(true)
       getReviews()
       .then((result) => {
         setLoading(false);
@@ -21,6 +22,7 @@ export const ReviewList = () => {
             <ul>{reviews.map((review) => {
               return (
               <div className='reviewlist'>
+                {loading ? <h2>Loading...</h2> : <h2>Here are your reviews</h2>}
                 <Link to={`/reviews/${review.review_id}`}>
                 <button>More Info</button>
                 </Link>
