@@ -32,6 +32,7 @@ export const ReviewList = () => {
                 {loading ? <p>Loading</p> : <button>More Info</button>}
                 <h1 key={review.review_id}>{review.owner}</h1>
                 <p>{review.review_body}</p>
+                <img src={review.review_img_url} />
                 {/* <ReviewCard></ReviewCard> */}
               </div>
               )

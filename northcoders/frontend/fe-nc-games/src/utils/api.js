@@ -8,8 +8,7 @@ export const getReviews = (review_id) => {
     let path = '/reviews'
 
     return reviewsUrl
-    .get({path
-    })
+    .get({path})
     .then((data) => {
       return data.reviews
     })
