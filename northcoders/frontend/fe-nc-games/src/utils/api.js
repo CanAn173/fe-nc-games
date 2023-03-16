@@ -20,7 +20,17 @@ export const getReviewsById = (review_id) => {
   return reviewsUrl
   .get(path)
   .then((res) => {
-    console.log(res)
     return res.data.customerReviews
+  })
+}
+
+export const getCommentsByReviewId = (review_id) => {
+  let path = `/reviews/${review_id}/comments`
+  
+  return reviewsUrl
+  .get(path)
+  .then((res) => {
+    console.log(res)
+    return res.data.commentsById
   })
 }
