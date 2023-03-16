@@ -6,7 +6,7 @@ export const ReviewCards = () => {
 
     const { review_id } = useParams();
 
-    const [reviewCard, setReviewCard] = useState([]);
+    const [reviewCard, setReviewCard] = useState({});
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
@@ -20,11 +20,11 @@ export const ReviewCards = () => {
         setLoading(false)
 
         })
-    })
+    }, []);
 
     return (
         <section>
-            {loading ? <p>Loading...</p> : <p>Here's your requested reviews</p>}
+            {loading ? <h2>Loading...</h2> : <h2>Here's your requested reviews:</h2>}
             <h1>Owner: {reviewCard.owner}</h1>
             <h2>Designer: {reviewCard.designer}</h2>
             <h3>Title: {reviewCard.title}</h3>
