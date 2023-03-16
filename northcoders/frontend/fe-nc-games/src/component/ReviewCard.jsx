@@ -20,7 +20,7 @@ export const ReviewCards = () => {
         setLoading(false)
 
         })
-    }, []);
+    }, [review_id]);
 
     return (
         <section>

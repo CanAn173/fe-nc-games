@@ -3,9 +3,10 @@ import { useParams } from 'react-router-dom';
 import { getCommentsByReviewId } from '../utils/api';
 
 export const CommentCards = () => {
+
     const { review_id } = useParams();
 
-    const [commentCard, setCommentCard] = useState({});
+    const [commentCard, setCommentCard] = useState([]);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
@@ -19,15 +20,23 @@ export const CommentCards = () => {
             setLoading(false)
 
         })
-    }, []);
+    }, [review_id]);
+    
+    if (loading) return <h2>Loading...</h2>
 
     return (
         <section>
-            {loading ? <h2>Loading...</h2> : <h2>Here are the comment</h2>}
-            <h1>Owner: {commentCard.author}</h1>
-            <p>{commentCard.body}</p>
-            <h3>Created-At: {commentCard.created_at}</h3>
-            <button>Votes: {commentCard.votes}</button>
+            <h2>Here are the comment</h2>
+            {commentCard.map((comment) => {
+              return (
+                <div key={comment.comment_id}>
+                    <h1>Owner: {comment.author}</h1>
+                    <p>{comment.body}</p>
+                    <h3>Created-At: {comment.created_at}</h3>
+                    <button>Votes: {comment.votes}</button>
+                </div>
+              )
+            })}
         </section>
     )
 }
