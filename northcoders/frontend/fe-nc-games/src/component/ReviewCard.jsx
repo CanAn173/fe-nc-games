@@ -10,6 +10,10 @@ export const ReviewCards = () => {
     const [reviewCard, setReviewCard] = useState({});
     const [loading, setLoading] = useState(true);
 
+    const onClick = (currentVote) => {
+        console.log(currentVote)
+    }
+
     useEffect(() => {
         
         setLoading(true)
@@ -23,9 +27,11 @@ export const ReviewCards = () => {
         })
     }, [review_id]);
 
+    if (loading) return <h2>Loading...</h2>
+
     return (
         <section>
-            {loading ? <h2>Loading...</h2> : <h2>Here's your requested reviews:</h2>}
+            <h2>Here's your requested reviews:</h2>
             <h1>Owner: {reviewCard.owner}</h1>
             <h2>Designer: {reviewCard.designer}</h2>
             <h3>Title: {reviewCard.title}</h3>

@@ -17,12 +17,14 @@ export const ReviewList = () => {
       })
     }, [])
 
+    if (loading) return <h2>Loading...</h2>
+
     return (
         <section>
             <ul>{reviews.map((review) => {
               return (
               <div className='reviewlist'>
-                {loading ? <h2>Loading...</h2> : <h2>Here are your reviews</h2>}
+                <h2>Here are your reviews</h2>
                 <Link to={`/reviews/${review.review_id}`}>
                 <button>More Info</button>
                 </Link>
