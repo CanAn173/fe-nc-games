@@ -14,7 +14,7 @@ function App() {
       <img src={logo} className="App-logo" alt="logo" />
       <Header />
       <Routes>
-        <Route path="/" element={<ReviewList />}/>
+        <Route path="/reviews" element={<ReviewList />}/>
         <Route path="/reviews/:review_id" element={<ReviewCards />}/>
         <Route path="/reviews/:review_id/comments" element={<CommentCards />} />
       </Routes>

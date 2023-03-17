@@ -37,7 +37,7 @@ export const CommentCards = () => {
                 </div>
               )
             })}
-            <Link to={'/'}>
+            <Link to={'/reviews'}>
             <button>Wanna Go Back?</button>
             </Link>
         </section>

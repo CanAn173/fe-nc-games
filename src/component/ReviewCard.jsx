@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { getReviewsById } from '../utils/api';
+import { getReviewsById, patchReviewVotes } from '../utils/api';
 
 export const ReviewCards = () => {
 
@@ -8,20 +8,40 @@ export const ReviewCards = () => {
 
     const [reviewCard, setReviewCard] = useState({});
     const [loading, setLoading] = useState(true);
+    const [likeClicked, setLikeClicked] = useState(false);
+    const [dislikeClicked, setDislikeClicked] = useState(false);
 
     const likes = () => {
         setReviewCard((currentCard) => {
           if (currentCard.review_id === reviewCard.review_id) {
+            setLikeClicked(true)
             return {...currentCard, votes: currentCard.votes + 1}
           }
+        })
+        patchReviewVotes(review_id, 1)
+        .catch((err) => {
+            setReviewCard((currentCard) => {
+                if (currentCard.review_id === reviewCard.review_id) {
+                  return {...currentCard, votes: currentCard.votes - 1}
+                }
+              })
         })
     }
 
     const dislikes = () => {
         setReviewCard((currentCard) => {
           if (currentCard.review_id === reviewCard.review_id) {
+            setDislikeClicked(true)
             return {...currentCard, votes: currentCard.votes - 1}
           }
+        })
+        patchReviewVotes(review_id, -1)
+        .catch((err) => {
+            setReviewCard((currentCard) => {
+                if (currentCard.review_id === reviewCard.review_id) {
+                  return {...currentCard, votes: currentCard.votes + 1}
+                }
+              })
         })
     }
 
@@ -51,9 +71,9 @@ export const ReviewCards = () => {
             <p>Comment: {reviewCard.review_body}</p>
             <img src={reviewCard.review_img_url} alt='img'/>
             <h2>Votes: {reviewCard.votes}</h2>
-            <button onClick={likes}>Like</button>
-            <button onClick={dislikes}>Dislike</button>
-            <Link to={'/'}>
+            <button onClick={likes} disabled={likeClicked}>Like</button>
+            <button onClick={dislikes} disabled={dislikeClicked}>Dislike</button>
+            <Link to={'/reviews'}>
             <button>Wanna Go Back?</button>
             </Link>
         </section>
