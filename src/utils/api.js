@@ -34,3 +34,13 @@ export const getCommentsByReviewId = (review_id) => {
     return res.data.commentsById
   })
 }
+
+export const patchReviewVotes = (review_id, votes) => {
+  let path = `/reviews/${review_id}`
+
+  return reviewsUrl
+  .patch(path, {inc_votes: votes})
+  .then((res) => {
+    return res.data.customerReviews
+  })
+}
