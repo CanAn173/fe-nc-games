@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { getCommentsByReviewId } from '../utils/api';
 
 export const CommentCards = () => {
@@ -37,6 +37,9 @@ export const CommentCards = () => {
                 </div>
               )
             })}
+            <Link to={'/'}>
+            <button>Wanna Go Back?</button>
+            </Link>
         </section>
     )
 }
